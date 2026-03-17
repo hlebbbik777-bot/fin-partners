@@ -2,85 +2,83 @@
 
 {% block content %}
 
-<div class="rounded-[32px] border border-white/10 bg-white/5 backdrop-blur-2xl p-8 shadow-2xl shadow-black/30 mb-6">
-  <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
+<div class="glass rounded-[32px] p-8 mb-6">
+  <div class="flex flex-col xl:flex-row xl:items-center xl:justify-between gap-6">
     <div>
-      <div class="text-sm uppercase tracking-[0.25em] text-slate-400 mb-3">dashboard</div>
-      <h1 class="text-4xl md:text-5xl font-extrabold tracking-tight">Партнёрская статистика</h1>
-      <p class="mt-4 text-slate-400 max-w-2xl leading-7">
+      <div class="text-sm uppercase tracking-[0.25em] txt-muted mb-3">dashboard</div>
+      <h1 class="text-4xl md:text-5xl font-extrabold tracking-tight txt-main">Партнёрская статистика</h1>
+      <p class="mt-4 txt-muted max-w-2xl leading-7">
         Следи за кликами, лидами и доходом в одном окне. Это центр управления трафиком и банковскими офферами.
       </p>
     </div>
 
-    <div class="w-full max-w-md rounded-[28px] border border-white/10 bg-white/5 p-4 backdrop-blur-xl">
+    <div class="w-full max-w-md glass-soft rounded-[28px] p-4">
       <img
         src="https://images.unsplash.com/photo-1556740749-887f6717d7e4?auto=format&fit=crop&w=900&q=80"
         alt="dashboard"
-        class="h-64 w-full object-cover rounded-3xl"
+        class="h-64 w-full object-cover rounded-[24px]"
       >
     </div>
   </div>
 </div>
 
 <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-5 mb-6">
-  <div class="rounded-[28px] border border-white/10 bg-white/5 backdrop-blur-2xl p-6">
-    <div class="text-xs uppercase tracking-[0.25em] text-slate-400">Clicks</div>
-    <div class="mt-4 text-5xl font-extrabold">{{ clicks or 0 }}</div>
-    <div class="mt-3 text-slate-400">все переходы по офферам</div>
+  <div class="glass rounded-[28px] p-6">
+    <div class="text-xs uppercase tracking-[0.25em] txt-muted">Clicks</div>
+    <div class="mt-4 text-5xl font-extrabold stat-num txt-main">{{ clicks or 0 }}</div>
+    <div class="mt-3 txt-muted">все переходы по офферам</div>
   </div>
 
-  <div class="rounded-[28px] border border-white/10 bg-white/5 backdrop-blur-2xl p-6">
-    <div class="text-xs uppercase tracking-[0.25em] text-slate-400">Leads</div>
-    <div class="mt-4 text-5xl font-extrabold">{{ leads or 0 }}</div>
-    <div class="mt-3 text-slate-400">подтверждённые и входящие конверсии</div>
+  <div class="glass rounded-[28px] p-6">
+    <div class="text-xs uppercase tracking-[0.25em] txt-muted">Leads</div>
+    <div class="mt-4 text-5xl font-extrabold stat-num txt-main">{{ leads or 0 }}</div>
+    <div class="mt-3 txt-muted">подтверждённые и входящие конверсии</div>
   </div>
 
-  <div class="rounded-[28px] border border-white/10 bg-white/5 backdrop-blur-2xl p-6">
-    <div class="text-xs uppercase tracking-[0.25em] text-slate-400">Revenue</div>
-    <div class="mt-4 text-5xl font-extrabold">{{ money or 0 }} ₽</div>
-    <div class="mt-3 text-slate-400">доход по лидам</div>
+  <div class="glass rounded-[28px] p-6">
+    <div class="text-xs uppercase tracking-[0.25em] txt-muted">Revenue</div>
+    <div class="mt-4 text-5xl font-extrabold stat-num txt-main">{{ money or 0 }} ₽</div>
+    <div class="mt-3 txt-muted">доход по лидам</div>
   </div>
 
-  <div class="rounded-[28px] border border-white/10 bg-white/5 backdrop-blur-2xl p-6">
-    <div class="text-xs uppercase tracking-[0.25em] text-slate-400">Status</div>
-    <div class="mt-4 text-3xl font-extrabold">ACTIVE</div>
-    <div class="mt-3 text-slate-400">аккаунт подключён к системе</div>
+  <div class="glass rounded-[28px] p-6">
+    <div class="text-xs uppercase tracking-[0.25em] txt-muted">Status</div>
+    <div class="mt-4 text-3xl font-extrabold txt-main">ACTIVE</div>
+    <div class="mt-3 txt-muted">аккаунт подключён к системе</div>
   </div>
 </div>
 
-<div class="rounded-[32px] border border-white/10 bg-white/5 backdrop-blur-2xl p-8 shadow-2xl shadow-black/30">
-  <div class="flex items-center justify-between gap-4 mb-6">
-    <div>
-      <h2 class="text-2xl font-bold">Последние лиды</h2>
-      <p class="mt-2 text-slate-400">Минимальная таблица последних конверсий</p>
-    </div>
+<div class="glass rounded-[32px] p-8">
+  <div class="mb-6">
+    <h2 class="text-2xl font-bold txt-main">Последние лиды</h2>
+    <p class="mt-2 txt-muted">Минимальная таблица последних конверсий</p>
   </div>
 
-  <div class="overflow-x-auto rounded-3xl border border-white/10">
-    <table class="min-w-full text-sm">
-      <thead class="bg-white/5 text-slate-300">
+  <div class="table-shell">
+    <table>
+      <thead>
         <tr>
-          <th class="px-5 py-4 text-left">ID</th>
-          <th class="px-5 py-4 text-left">Offer</th>
-          <th class="px-5 py-4 text-left">Status</th>
-          <th class="px-5 py-4 text-left">Payout</th>
-          <th class="px-5 py-4 text-left">Date</th>
+          <th>ID</th>
+          <th>Offer</th>
+          <th>Status</th>
+          <th>Payout</th>
+          <th>Date</th>
         </tr>
       </thead>
       <tbody>
         {% if leads_table %}
           {% for lead in leads_table %}
-          <tr class="border-t border-white/10">
-            <td class="px-5 py-4">{{ lead.id }}</td>
-            <td class="px-5 py-4">{{ lead.name }}</td>
-            <td class="px-5 py-4">{{ lead.status }}</td>
-            <td class="px-5 py-4">{{ lead.payout }} ₽</td>
-            <td class="px-5 py-4">{{ lead.created_at }}</td>
+          <tr>
+            <td>{{ lead.id }}</td>
+            <td>{{ lead.name }}</td>
+            <td>{{ lead.status }}</td>
+            <td>{{ lead.payout }} ₽</td>
+            <td>{{ lead.created_at }}</td>
           </tr>
           {% endfor %}
         {% else %}
-          <tr class="border-t border-white/10">
-            <td colspan="5" class="px-5 py-10 text-center text-slate-400">Пока лидов нет</td>
+          <tr>
+            <td colspan="5" class="text-center txt-muted">Пока лидов нет</td>
           </tr>
         {% endif %}
       </tbody>
