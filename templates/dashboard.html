@@ -2,121 +2,74 @@
 
 {% block content %}
 
-<div class="glass rounded-[32px] p-8 mb-6">
-
+<div class="glass rounded-[32px] p-8 mb-6 fade-up">
   <div class="flex flex-col xl:flex-row xl:items-center xl:justify-between gap-6">
-
     <div>
-      <div class="text-sm uppercase tracking-[0.25em] txt-muted mb-3">
-        dashboard
-      </div>
-
-      <h1 class="text-4xl md:text-5xl font-extrabold tracking-tight txt-main">
-        Партнёрская статистика
-      </h1>
-
+      <div class="text-sm uppercase tracking-[0.25em] txt-muted mb-3">dashboard</div>
+      <h1 class="text-4xl md:text-5xl font-extrabold tracking-tight txt-main">Партнёрская статистика</h1>
       <p class="mt-4 txt-muted max-w-2xl leading-7">
-        Следи за кликами, лидами и доходом в одном окне.
+        Следи за кликами, лидами, балансом и доходом в одном окне.
       </p>
     </div>
 
     <div class="w-full max-w-md flex items-center justify-center">
-
-      <img
-      src="/static/images/monkey.jpg"
-      class="rounded-3xl shadow-2xl max-h-[420px]"
-      >
-
+      <img src="/static/images/monkey.jpg" class="rounded-3xl shadow-2xl max-h-[420px]">
     </div>
-
   </div>
-
 </div>
 
-
-
-<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-5 mb-6">
-
+<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-5 mb-6 fade-up">
   <div class="glass rounded-[28px] p-6">
-    <div class="text-xs uppercase tracking-[0.25em] txt-muted">
-      Clicks
-    </div>
-
-    <div class="mt-4 text-5xl font-extrabold stat-num txt-main">
-      {{ clicks or 0 }}
-    </div>
-
-    <div class="mt-3 txt-muted">
-      переходы по офферам
-    </div>
+    <div class="text-xs uppercase tracking-[0.25em] txt-muted">Clicks</div>
+    <div class="mt-4 text-5xl font-extrabold txt-main">{{ clicks or 0 }}</div>
+    <div class="mt-3 txt-muted">переходы по офферам</div>
   </div>
 
-
   <div class="glass rounded-[28px] p-6">
-    <div class="text-xs uppercase tracking-[0.25em] txt-muted">
-      Leads
-    </div>
-
-    <div class="mt-4 text-5xl font-extrabold stat-num txt-main">
-      {{ leads or 0 }}
-    </div>
-
-    <div class="mt-3 txt-muted">
-      полученные заявки
-    </div>
+    <div class="text-xs uppercase tracking-[0.25em] txt-muted">Leads</div>
+    <div class="mt-4 text-5xl font-extrabold txt-main">{{ leads or 0 }}</div>
+    <div class="mt-3 txt-muted">полученные заявки</div>
   </div>
 
-
   <div class="glass rounded-[28px] p-6">
-    <div class="text-xs uppercase tracking-[0.25em] txt-muted">
-      Revenue
-    </div>
-
-    <div class="mt-4 text-5xl font-extrabold stat-num txt-main">
-      {{ money or 0 }} ₽
-    </div>
-
-    <div class="mt-3 txt-muted">
-      доход партнёра
-    </div>
+    <div class="text-xs uppercase tracking-[0.25em] txt-muted">Revenue</div>
+    <div class="mt-4 text-5xl font-extrabold txt-main">{{ money or 0 }} ₽</div>
+    <div class="mt-3 txt-muted">доход партнёра</div>
   </div>
 
-
   <div class="glass rounded-[28px] p-6">
-    <div class="text-xs uppercase tracking-[0.25em] txt-muted">
-      Status
-    </div>
-
-    <div class="mt-4 text-3xl font-extrabold txt-main">
-      ACTIVE
-    </div>
-
-    <div class="mt-3 txt-muted">
-      аккаунт активен
-    </div>
+    <div class="text-xs uppercase tracking-[0.25em] txt-muted">Live balance</div>
+    <div class="mt-4 text-5xl font-extrabold txt-main">{{ user.balance or 0 }} ₽</div>
+    <div class="mt-3 txt-muted">доступно в аккаунте</div>
   </div>
-
 </div>
 
+<div class="grid grid-cols-1 xl:grid-cols-2 gap-6 mb-6 fade-up">
+  <div class="glass rounded-[32px] p-8">
+    <div class="mb-4">
+      <h2 class="text-2xl font-bold txt-main">График кликов</h2>
+      <p class="mt-2 txt-muted">Последние 7 дней</p>
+    </div>
+    <canvas id="clicksChart" height="120"></canvas>
+  </div>
 
+  <div class="glass rounded-[32px] p-8">
+    <div class="mb-4">
+      <h2 class="text-2xl font-bold txt-main">График дохода</h2>
+      <p class="mt-2 txt-muted">Доход по дням</p>
+    </div>
+    <canvas id="revenueChart" height="120"></canvas>
+  </div>
+</div>
 
-<div class="glass rounded-[32px] p-8">
-
+<div class="glass rounded-[32px] p-8 fade-up">
   <div class="mb-6">
-    <h2 class="text-2xl font-bold txt-main">
-      Последние лиды
-    </h2>
-
-    <p class="mt-2 txt-muted">
-      Последние конверсии по аккаунту
-    </p>
+    <h2 class="text-2xl font-bold txt-main">Последние лиды</h2>
+    <p class="mt-2 txt-muted">Последние конверсии по аккаунту</p>
   </div>
-
 
   <div class="table-shell">
-
     <table>
-
       <thead>
         <tr>
           <th>ID</th>
@@ -126,14 +79,9 @@
           <th>Date</th>
         </tr>
       </thead>
-
-
       <tbody>
-
         {% if leads_table %}
-
           {% for lead in leads_table %}
-
           <tr>
             <td>{{ lead.id }}</td>
             <td>{{ lead.name }}</td>
@@ -141,25 +89,68 @@
             <td>{{ lead.payout }} ₽</td>
             <td>{{ lead.created_at }}</td>
           </tr>
-
           {% endfor %}
-
         {% else %}
-
-        <tr>
-          <td colspan="5" class="text-center txt-muted">
-            Пока лидов нет
-          </td>
-        </tr>
-
+          <tr>
+            <td colspan="5" class="text-center txt-muted">Пока лидов нет</td>
+          </tr>
         {% endif %}
-
       </tbody>
-
     </table>
-
   </div>
-
 </div>
+
+<script>
+  const labels = {{ chart_labels | tojson }};
+  const clicksData = {{ clicks_chart | tojson }};
+  const revenueData = {{ revenue_chart | tojson }};
+
+  const isLight = document.documentElement.getAttribute("data-theme") === "light";
+  const gridColor = isLight ? "rgba(15,23,42,0.08)" : "rgba(255,255,255,0.08)";
+  const tickColor = isLight ? "#475569" : "#9aa9c7";
+
+  new Chart(document.getElementById("clicksChart"), {
+    type: "line",
+    data: {
+      labels: labels,
+      datasets: [{
+        label: "Clicks",
+        data: clicksData,
+        borderColor: "#18b7ff",
+        backgroundColor: "rgba(24,183,255,0.18)",
+        fill: true,
+        tension: 0.35,
+        borderWidth: 3
+      }]
+    },
+    options: {
+      plugins: { legend: { display: false } },
+      scales: {
+        x: { ticks: { color: tickColor }, grid: { color: gridColor } },
+        y: { ticks: { color: tickColor }, grid: { color: gridColor } }
+      }
+    }
+  });
+
+  new Chart(document.getElementById("revenueChart"), {
+    type: "bar",
+    data: {
+      labels: labels,
+      datasets: [{
+        label: "Revenue",
+        data: revenueData,
+        backgroundColor: "rgba(109,93,252,0.75)",
+        borderRadius: 12
+      }]
+    },
+    options: {
+      plugins: { legend: { display: false } },
+      scales: {
+        x: { ticks: { color: tickColor }, grid: { color: gridColor } },
+        y: { ticks: { color: tickColor }, grid: { color: gridColor } }
+      }
+    }
+  });
+</script>
 
 {% endblock %}

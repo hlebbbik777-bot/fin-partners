@@ -5,32 +5,31 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>FIN PARTNERS</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <style>
     :root{
       --bg:#07111f;
       --bg2:#0b1220;
       --panel:rgba(255,255,255,0.06);
-      --panel-2:rgba(255,255,255,0.04);
+      --panel2:rgba(255,255,255,0.04);
       --line:rgba(255,255,255,0.10);
       --text:#eef4ff;
       --muted:#9aa9c7;
       --accent:#6d5dfc;
       --accent2:#18b7ff;
-      --danger:#fb7185;
       --shadow:0 24px 70px rgba(0,0,0,0.35);
     }
 
     html[data-theme="light"]{
       --bg:#eef4ff;
       --bg2:#dbe7ff;
-      --panel:rgba(255,255,255,0.78);
-      --panel-2:rgba(255,255,255,0.65);
+      --panel:rgba(255,255,255,0.80);
+      --panel2:rgba(255,255,255,0.65);
       --line:rgba(15,23,42,0.10);
       --text:#0f172a;
       --muted:#64748b;
       --accent:#4f46e5;
       --accent2:#0ea5e9;
-      --danger:#e11d48;
       --shadow:0 20px 40px rgba(15,23,42,0.08);
     }
 
@@ -43,21 +42,6 @@
       color:var(--text);
     }
 
-    .app-grid{
-      background-image:
-        linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
-      background-size:34px 34px;
-      opacity:.2;
-    }
-
-    html[data-theme="light"] .app-grid{
-      background-image:
-        linear-gradient(rgba(15,23,42,0.04) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(15,23,42,0.04) 1px, transparent 1px);
-      opacity:.45;
-    }
-
     .glass{
       background:linear-gradient(135deg, rgba(255,255,255,0.08), rgba(255,255,255,0.03)), var(--panel);
       border:1px solid var(--line);
@@ -66,7 +50,7 @@
     }
 
     .glass-soft{
-      background:var(--panel-2);
+      background:var(--panel2);
       border:1px solid var(--line);
       backdrop-filter:blur(18px);
     }
@@ -74,47 +58,38 @@
     .txt-main{ color:var(--text); }
     .txt-muted{ color:var(--muted); }
 
-    .nav-link{
-      color:var(--text);
-      opacity:.86;
-      transition:.18s ease;
-    }
-
-    .nav-link:hover{
-      background:rgba(255,255,255,0.06);
-      opacity:1;
-    }
-
-    html[data-theme="light"] .nav-link:hover{
-      background:rgba(15,23,42,0.05);
-    }
-
-    .btn-main{
-      background:linear-gradient(135deg,var(--accent),var(--accent2));
-      color:white;
-    }
-
-    .btn-ghost{
-      background:var(--panel-2);
-      border:1px solid var(--line);
-      color:var(--text);
-    }
-
     .field{
       width:100%;
       border:1px solid var(--line);
-      background:var(--panel-2);
+      background:var(--panel2);
       color:var(--text);
       border-radius:18px;
       padding:14px 16px;
       outline:none;
     }
 
+    .btn-main{
+      background:linear-gradient(135deg,var(--accent),var(--accent2));
+      color:white;
+      transition:.2s ease;
+    }
+
+    .btn-main:hover{
+      transform:translateY(-1px);
+      filter:brightness(1.05);
+    }
+
+    .btn-ghost{
+      background:var(--panel2);
+      border:1px solid var(--line);
+      color:var(--text);
+    }
+
     .table-shell{
       border:1px solid var(--line);
       border-radius:24px;
       overflow:hidden;
-      background:var(--panel-2);
+      background:var(--panel2);
     }
 
     .table-shell table{
@@ -132,34 +107,35 @@
       background:rgba(255,255,255,0.03);
     }
 
-    html[data-theme="light"] .table-shell th{
-      background:rgba(15,23,42,0.03);
-    }
-
     .table-shell td{
       padding:16px 18px;
       border-top:1px solid var(--line);
       color:var(--text);
     }
 
-    .stat-num{
-      letter-spacing:-0.04em;
+    .fade-up{
+      animation:fadeUp .55s ease;
     }
 
-    .theme-dot{
-      width:10px;
-      height:10px;
-      border-radius:999px;
-      background:linear-gradient(135deg,var(--accent),var(--accent2));
-      box-shadow:0 0 18px rgba(59,130,246,0.45);
+    @keyframes fadeUp{
+      from{ opacity:0; transform:translateY(14px); }
+      to{ opacity:1; transform:translateY(0); }
+    }
+
+    .mobile-drawer{
+      transform:translateX(-100%);
+      transition:transform .25s ease;
+    }
+
+    .mobile-drawer.open{
+      transform:translateX(0);
     }
   </style>
 </head>
 <body class="min-h-screen">
-  <div class="fixed inset-0 app-grid -z-10"></div>
-
   <div class="min-h-screen flex">
-    <aside class="hidden md:flex w-72 flex-col glass border-r">
+
+    <aside class="hidden md:flex w-72 flex-col glass border-r fade-up">
       <div class="px-6 py-6 border-b" style="border-color:var(--line)">
         <div class="flex items-center gap-4">
           <div class="h-14 w-14 rounded-2xl btn-main flex items-center justify-center shadow-lg">
@@ -173,41 +149,45 @@
       </div>
 
       <nav class="px-4 py-5 space-y-2">
-        <a href="/dashboard" class="nav-link block rounded-2xl px-4 py-3">Dashboard</a>
-        <a href="/offers" class="nav-link block rounded-2xl px-4 py-3">Offers</a>
-        <a href="/flows" class="nav-link block rounded-2xl px-4 py-3">Flows</a>
-        <a href="/leads" class="nav-link block rounded-2xl px-4 py-3">Leads</a>
-        <a href="/payouts" class="nav-link block rounded-2xl px-4 py-3">Payouts</a>
-        <a href="/profile" class="nav-link block rounded-2xl px-4 py-3">Profile</a>
+        <a href="/dashboard" class="block rounded-2xl px-4 py-3 hover:bg-white/10 transition txt-main">Dashboard</a>
+        <a href="/offers" class="block rounded-2xl px-4 py-3 hover:bg-white/10 transition txt-main">Offers</a>
+        <a href="/flows" class="block rounded-2xl px-4 py-3 hover:bg-white/10 transition txt-main">Flows</a>
+        <a href="/leads" class="block rounded-2xl px-4 py-3 hover:bg-white/10 transition txt-main">Leads</a>
+        <a href="/payouts" class="block rounded-2xl px-4 py-3 hover:bg-white/10 transition txt-main">Payouts</a>
+        <a href="/profile" class="block rounded-2xl px-4 py-3 hover:bg-white/10 transition txt-main">Profile</a>
         <a href="/logout" class="block rounded-2xl px-4 py-3 text-rose-300 hover:bg-rose-500/10 transition">Logout</a>
       </nav>
-
-      <div class="mt-auto p-4">
-        <div class="glass-soft rounded-3xl p-5">
-          <div class="flex items-center gap-3">
-            <div class="theme-dot"></div>
-            <div class="text-sm font-semibold txt-main">FIN PARTNERS</div>
-          </div>
-          <div class="mt-3 text-sm txt-muted leading-6">
-            CPA platform with offers, leads, payouts and traffic tracking.
-          </div>
-        </div>
-      </div>
     </aside>
+
+    <div id="mobileDrawer" class="mobile-drawer md:hidden fixed inset-y-0 left-0 z-50 w-72 glass p-5">
+      <div class="flex items-center justify-between mb-6">
+        <div class="text-2xl font-extrabold txt-main">FIN PARTNERS</div>
+        <button id="closeDrawer" class="btn-ghost rounded-xl px-3 py-2">✕</button>
+      </div>
+
+      <nav class="space-y-2">
+        <a href="/dashboard" class="block rounded-2xl px-4 py-3 hover:bg-white/10 transition txt-main">Dashboard</a>
+        <a href="/offers" class="block rounded-2xl px-4 py-3 hover:bg-white/10 transition txt-main">Offers</a>
+        <a href="/flows" class="block rounded-2xl px-4 py-3 hover:bg-white/10 transition txt-main">Flows</a>
+        <a href="/leads" class="block rounded-2xl px-4 py-3 hover:bg-white/10 transition txt-main">Leads</a>
+        <a href="/payouts" class="block rounded-2xl px-4 py-3 hover:bg-white/10 transition txt-main">Payouts</a>
+        <a href="/profile" class="block rounded-2xl px-4 py-3 hover:bg-white/10 transition txt-main">Profile</a>
+        <a href="/logout" class="block rounded-2xl px-4 py-3 text-rose-300 hover:bg-rose-500/10 transition">Logout</a>
+      </nav>
+    </div>
 
     <main class="flex-1 min-w-0">
       <div class="p-4 md:p-8">
-        <div class="glass rounded-[30px] px-5 py-4 mb-6 flex items-center justify-between gap-4">
-          <div>
-            <div class="text-sm uppercase tracking-[0.25em] txt-muted">FIN PARTNERS</div>
-            <div class="text-2xl font-extrabold tracking-tight txt-main">Affiliate Dashboard</div>
+        <div class="glass rounded-[30px] px-5 py-4 mb-6 flex items-center justify-between gap-4 fade-up">
+          <div class="flex items-center gap-3">
+            <button id="openDrawer" class="md:hidden btn-ghost rounded-2xl px-4 py-3 font-semibold">☰</button>
+            <div>
+              <div class="text-sm uppercase tracking-[0.25em] txt-muted">FIN PARTNERS</div>
+              <div class="text-2xl font-extrabold tracking-tight txt-main">Affiliate Dashboard</div>
+            </div>
           </div>
 
-          <button
-            id="themeToggle"
-            class="btn-ghost rounded-2xl px-4 py-3 font-semibold flex items-center gap-3"
-            type="button"
-          >
+          <button id="themeToggle" class="btn-ghost rounded-2xl px-4 py-3 font-semibold flex items-center gap-3" type="button">
             <span id="themeIcon">🌙</span>
             <span id="themeLabel">Dark</span>
           </button>
@@ -220,31 +200,43 @@
 
   <script>
     const root = document.documentElement;
-    const toggle = document.getElementById("themeToggle");
-    const label = document.getElementById("themeLabel");
-    const icon = document.getElementById("themeIcon");
+    const themeToggle = document.getElementById("themeToggle");
+    const themeLabel = document.getElementById("themeLabel");
+    const themeIcon = document.getElementById("themeIcon");
 
     const savedTheme = localStorage.getItem("theme") || "dark";
     root.setAttribute("data-theme", savedTheme);
-    setThemeText(savedTheme);
+    updateThemeText(savedTheme);
 
-    function setThemeText(theme){
+    function updateThemeText(theme){
       if(theme === "light"){
-        label.textContent = "Light";
-        icon.textContent = "☀️";
+        themeLabel.textContent = "Light";
+        themeIcon.textContent = "☀️";
       } else {
-        label.textContent = "Dark";
-        icon.textContent = "🌙";
+        themeLabel.textContent = "Dark";
+        themeIcon.textContent = "🌙";
       }
     }
 
-    toggle.addEventListener("click", () => {
+    themeToggle.addEventListener("click", () => {
       const current = root.getAttribute("data-theme");
       const next = current === "dark" ? "light" : "dark";
       root.setAttribute("data-theme", next);
       localStorage.setItem("theme", next);
-      setThemeText(next);
+      updateThemeText(next);
     });
+
+    const drawer = document.getElementById("mobileDrawer");
+    const openDrawer = document.getElementById("openDrawer");
+    const closeDrawer = document.getElementById("closeDrawer");
+
+    if (openDrawer) {
+      openDrawer.addEventListener("click", () => drawer.classList.add("open"));
+    }
+
+    if (closeDrawer) {
+      closeDrawer.addEventListener("click", () => drawer.classList.remove("open"));
+    }
   </script>
 </body>
 </html>
