@@ -14,6 +14,9 @@ def db():
 
 
 # LOGIN
+@app.route("/")
+def home():
+    return redirect("/login")
 @app.route("/login", methods=["GET","POST"])
 def login():
 
