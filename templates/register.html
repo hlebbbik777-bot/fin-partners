@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block title %}Kirgey228 — регистрация{% endblock %}
+
+{% block content %}
+<div class="grid-2">
+  <div class="panel">
+    <h1>Регистрация партнёра</h1>
+    <p class="muted">Создай аккаунт и получи доступ к закрытым банковским офферам и бонусным программам.</p>
+
+    <form method="POST">
+      <label class="label">
+        Email
+        <input class="input" type="email" name="email" placeholder="you@example.com" required>
+      </label>
+
+      <label class="label">
+        Пароль
+        <input class="input" type="password" name="password" placeholder="Придумай пароль" required>
+      </label>
+
+      <button class="btn btn-primary" type="submit">Создать аккаунт</button>
+    </form>
+  </div>
+
+  <div class="panel">
+    <img
+      class="hero-image"
+      src="https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?auto=format&fit=crop&w=1200&q=80"
+      alt="Register"
+    >
+  </div>
+</div>
+{% endblock %}
+

@@ -1,0 +1,110 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2 class="mb-4">Офферы</h2>
+
+<div class="card mb-4">
+<div class="card-body">
+
+<h4>Дебетовая карта ВТБ</h4>
+
+<p class="text-muted">
+Оформление дебетовой карты ВТБ
+</p>
+
+<div class="row mt-3">
+
+<div class="col-md-3">
+<b>Тип</b><br>
+CPL
+</div>
+
+<div class="col-md-3">
+<b>Выплата</b><br>
+1500 ₽
+</div>
+
+<div class="col-md-3">
+<b>ГЕО</b><br>
+Россия
+</div>
+
+<div class="col-md-3">
+<b>Статус</b><br>
+Активен
+</div>
+
+</div>
+
+<hr>
+
+<label class="form-label">Реферальная ссылка</label>
+
+<div class="input-group">
+
+<input class="form-control" id="link" value="https://clck.ru/3SZw9p" readonly>
+
+<button class="btn btn-primary" onclick="copyLink()">
+Копировать ссылку
+</button>
+
+</div>
+
+</div>
+</div>
+
+
+<div class="card">
+<div class="card-body">
+
+<h4>Дополнительная программа</h4>
+
+<p class="text-muted">
+Приведи человека на оформление карт всех банков
+</p>
+
+<div class="row mt-3">
+
+<div class="col-md-4">
+<b>Бонус</b><br>
+20 000 ₽
+</div>
+
+<div class="col-md-4">
+<b>Условие</b><br>
+клиент оформляет карты всех банков
+</div>
+
+<div class="col-md-4">
+<b>Менеджер</b><br>
+@adsbatumiii
+</div>
+
+</div>
+
+<hr>
+
+<a href="https://t.me/adsbatumiii" class="btn btn-success">
+Написать менеджеру
+</a>
+
+</div>
+</div>
+
+
+<script>
+
+function copyLink(){
+
+var copyText = document.getElementById("link");
+
+navigator.clipboard.writeText(copyText.value);
+
+alert("Ссылка скопирована");
+
+}
+
+</script>
+
+{% endblock %}

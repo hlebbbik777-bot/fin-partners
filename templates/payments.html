@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2 class="mb-4">Реквизиты для выплат</h2>
+
+<div class="card">
+<div class="card-body">
+
+<form method="POST">
+
+<div class="mb-3">
+<label class="form-label">Имя</label>
+<input class="form-control" name="name" value="{{ user.name or '' }}">
+</div>
+
+<div class="mb-3">
+<label class="form-label">Telegram</label>
+<input class="form-control" name="telegram" value="{{ user.telegram or '' }}">
+</div>
+
+<div class="mb-3">
+<label class="form-label">Способ выплаты</label>
+
+<select class="form-control" name="payment_method">
+
+<option value="USDT">USDT</option>
+<option value="Карта">Банковская карта</option>
+<option value="СБП">СБП</option>
+
+</select>
+
+</div>
+
+<div class="mb-3">
+<label class="form-label">Реквизиты</label>
+
+<textarea class="form-control" name="payment_details" rows="3">{{ user.payment_details or '' }}</textarea>
+
+</div>
+
+<button class="btn btn-primary">
+Сохранить реквизиты
+</button>
+
+</form>
+
+</div>
+</div>
+
+{% endblock %}

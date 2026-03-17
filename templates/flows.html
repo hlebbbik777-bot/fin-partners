@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="card">
+
+<h2>Мои партнёрские ссылки</h2>
+
+<table>
+
+<tr>
+<th>Оффер</th>
+<th>Выплата</th>
+<th>Ссылка</th>
+</tr>
+
+{% for offer in offers %}
+
+<tr>
+
+<td>{{ offer.name }}</td>
+
+<td>{{ offer.payout }} ₽</td>
+
+<td>
+
+<input style="width:400px"
+value="http://127.0.0.1:5000/go/{{ offer.id }}?ref={{ user_id }}">
+
+</td>
+
+</tr>
+
+{% endfor %}
+
+</table>
+
+</div>
+
+{% endblock %}

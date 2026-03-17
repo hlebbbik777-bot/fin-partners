@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>FIN PARTNERS</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg:#07111f;
+      --bg2:#0a1428;
+      --text:#eef4ff;
+      --muted:#9aa9c7;
+      --line:rgba(255,255,255,0.10);
+      --glass:rgba(255,255,255,0.06);
+      --accent:#6d5dfc;
+      --accent2:#18b7ff;
+      --shadow:0 24px 70px rgba(0,0,0,0.35);
+    }
+
+    *{ box-sizing:border-box; }
+
+    html,body{
+      margin:0;
+      padding:0;
+      font-family:"Inter",sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(circle at 12% 12%, rgba(109,93,252,0.22), transparent 24%),
+        radial-gradient(circle at 88% 14%, rgba(24,183,255,0.16), transparent 22%),
+        linear-gradient(180deg, var(--bg) 0%, var(--bg2) 100%);
+      min-height:100%;
+    }
+
+    body::before{
+      content:"";
+      position:fixed;
+      inset:0;
+      pointer-events:none;
+      background:
+        linear-gradient(90deg, rgba(255,255,255,0.018) 1px, transparent 1px),
+        linear-gradient(rgba(255,255,255,0.018) 1px, transparent 1px);
+      background-size:36px 36px;
+      mask-image:linear-gradient(180deg, rgba(255,255,255,0.35), transparent 85%);
+    }
+
+    a{
+      color:inherit;
+      text-decoration:none;
+    }
+
+    .topbar{
+      position:sticky;
+      top:0;
+      z-index:20;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:24px;
+      padding:18px 36px;
+      background:rgba(2,8,20,0.72);
+      backdrop-filter:blur(18px);
+      border-bottom:1px solid var(--line);
+    }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:14px;
+      min-width:240px;
+    }
+
+    .brand-badge{
+      width:54px;
+      height:54px;
+      border-radius:18px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background:linear-gradient(135deg,var(--accent),var(--accent2));
+      box-shadow:0 16px 40px rgba(109,93,252,0.32);
+      overflow:hidden;
+      flex-shrink:0;
+    }
+
+    .brand-svg{
+      width:34px;
+      height:34px;
+      display:block;
+    }
+
+    .brand-title{
+      font-size:30px;
+      font-weight:800;
+      letter-spacing:-0.02em;
+    }
+
+    .nav{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      flex-wrap:wrap;
+      justify-content:flex-end;
+    }
+
+    .nav a{
+      padding:12px 16px;
+      border-radius:16px;
+      color:#dbe7ff;
+      font-weight:600;
+      background:transparent;
+      border:1px solid transparent;
+      transition:0.18s ease;
+    }
+
+    .nav a:hover{
+      background:rgba(255,255,255,0.05);
+      border-color:var(--line);
+    }
+
+    .page{
+      max-width:1260px;
+      margin:0 auto;
+      padding:30px 26px 50px;
+    }
+
+    .hero{
+      margin-bottom:24px;
+      padding:28px 30px;
+      border-radius:32px;
+      background:
+        linear-gradient(135deg, rgba(109,93,252,0.14), rgba(24,183,255,0.10)),
+        var(--glass);
+      border:1px solid var(--line);
+      backdrop-filter:blur(20px);
+      box-shadow:var(--shadow);
+      position:relative;
+      overflow:hidden;
+    }
+
+    .hero::after{
+      content:"";
+      position:absolute;
+      right:-70px;
+      top:-70px;
+      width:220px;
+      height:220px;
+      border-radius:50%;
+      background:radial-gradient(circle, rgba(255,255,255,0.12), transparent 68%);
+      pointer-events:none;
+    }
+
+    .hero-title{
+      margin:0 0 8px 0;
+      font-size:42px;
+      line-height:1.02;
+      font-weight:800;
+      letter-spacing:-0.03em;
+    }
+
+    .hero-sub{
+      margin:0;
+      color:#c6d4f0;
+      font-size:16px;
+      line-height:1.7;
+      max-width:760px;
+    }
+
+    .cards{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:18px;
+      margin-bottom:24px;
+    }
+
+    .card{
+      background:
+        linear-gradient(135deg, rgba(255,255,255,0.08), rgba(255,255,255,0.03)),
+        var(--glass);
+      border:1px solid var(--line);
+      backdrop-filter:blur(18px);
+      border-radius:28px;
+      box-shadow:var(--shadow);
+      padding:24px;
+    }
+
+    .card-title{
+      font-size:13px;
+      color:var(--muted);
+      margin-bottom:10px;
+      text-transform:uppercase;
+      letter-spacing:0.08em;
+    }
+
+    .card-value{
+      font-size:38px;
+      font-weight:800;
+      letter-spacing:-0.03em;
+      margin-bottom:8px;
+    }
+
+    .card-note{
+      color:#c7d6f3;
+      font-size:14px;
+      line-height:1.5;
+    }
+
+    .panel{
+      background:
+        linear-gradient(135deg, rgba(255,255,255,0.07), rgba(255,255,255,0.03)),
+        var(--glass);
+      border:1px solid var(--line);
+      backdrop-filter:blur(18px);
+      border-radius:30px;
+      box-shadow:var(--shadow);
+      padding:28px;
+      margin-bottom:24px;
+    }
+
+    .panel h1,
+    .panel h2,
+    .panel h3{
+      margin-top:0;
+      letter-spacing:-0.02em;
+    }
+
+    .muted{
+      color:var(--muted);
+    }
+
+    .grid-2{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:22px;
+    }
+
+    .grid-4{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:18px;
+    }
+
+    .field{
+      display:flex;
+      flex-direction:column;
+      gap:8px;
+      margin-bottom:16px;
+    }
+
+    .field label{
+      color:#dce7ff;
+      font-size:14px;
+      font-weight:600;
+    }
+
+    .input,
+    .select,
+    .textarea{
+      width:100%;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,0.05);
+      color:white;
+      border-radius:18px;
+      padding:14px 16px;
+      outline:none;
+      font-size:15px;
+      backdrop-filter:blur(8px);
+    }
+
+    .textarea{
+      min-height:110px;
+      resize:vertical;
+    }
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      border:none;
+      border-radius:18px;
+      padding:14px 20px;
+      font-weight:700;
+      cursor:pointer;
+      color:white;
+      background:linear-gradient(135deg,var(--accent),var(--accent2));
+      box-shadow:0 16px 40px rgba(109,93,252,0.28);
+    }
+
+    .btn-secondary{
+      background:rgba(255,255,255,0.06);
+      border:1px solid var(--line);
+      box-shadow:none;
+    }
+
+    .table-wrap{
+      overflow:auto;
+      border-radius:22px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,0.03);
+    }
+
+    table{
+      width:100%;
+      border-collapse:collapse;
+      min-width:760px;
+    }
+
+    th{
+      text-align:left;
+      padding:16px 18px;
+      color:#9eb0d2;
+      font-size:12px;
+      text-transform:uppercase;
+      letter-spacing:0.08em;
+      background:rgba(255,255,255,0.03);
+    }
+
+    td{
+      padding:16px 18px;
+      border-top:1px solid rgba(255,255,255,0.06);
+      color:#edf3ff;
+    }
+
+    tr:hover td{
+      background:rgba(255,255,255,0.025);
+    }
+
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:8px 12px;
+      border-radius:999px;
+      font-size:12px;
+      font-weight:700;
+      background:rgba(25,195,125,0.14);
+      color:#8df2c0;
+      border:1px solid rgba(25,195,125,0.24);
+    }
+
+    @media (max-width: 1100px){
+      .cards,
+      .grid-4{
+        grid-template-columns:repeat(2,1fr);
+      }
+
+      .grid-2{
+        grid-template-columns:1fr;
+      }
+
+      .topbar{
+        padding:16px 18px;
+        flex-direction:column;
+        align-items:flex-start;
+      }
+
+      .page{
+        padding:20px 14px 36px;
+      }
+
+      .hero-title{
+        font-size:34px;
+      }
+    }
+
+    @media (max-width: 700px){
+      .cards,
+      .grid-4{
+        grid-template-columns:1fr;
+      }
+
+      .brand-title{
+        font-size:24px;
+      }
+
+      .nav{
+        gap:8px;
+      }
+
+      .nav a{
+        padding:10px 12px;
+        font-size:14px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="topbar">
+    <div class="brand">
+      <div class="brand-badge">
+        <svg class="brand-svg" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="8" y="34" width="8" height="20" rx="2" fill="white"/>
+          <rect x="19" y="24" width="8" height="30" rx="2" fill="white"/>
+          <rect x="30" y="12" width="8" height="42" rx="2" fill="white"/>
+          <rect x="41" y="28" width="8" height="26" rx="2" fill="white"/>
+          <path d="M48 16L54 10V22L48 16Z" fill="white"/>
+        </svg>
+      </div>
+      <div class="brand-title">FIN PARTNERS</div>
+    </div>
+
+    <div class="nav">
+      <a href="/dashboard">Статистика</a>
+      <a href="/offers">Офферы</a>
+      <a href="/flows">Партнёрские ссылки</a>
+      <a href="/leads">Лиды</a>
+      <a href="/payouts">Выплаты</a>
+      <a href="/logout">Выход</a>
+    </div>
+  </div>
+
+  <div class="page">
+    {% block content %}{% endblock %}
+  </div>
+
+</body>
+</html>

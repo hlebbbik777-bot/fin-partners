@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="card">
+
+<h2>Офферы</h2>
+
+<table>
+
+<tr>
+<th>Оффер</th>
+<th>Выплата</th>
+<th>Тест</th>
+</tr>
+
+{% for offer in offers %}
+
+<tr>
+
+<td>{{ offer.name }}</td>
+
+<td>{{ offer.payout }} ₽</td>
+
+<td>
+
+<a href="/click/{{ offer.id }}">
+<button>Тест клик</button>
+</a>
+
+</td>
+
+</tr>
+
+{% endfor %}
+
+</table>
+
+</div>
+
+{% endblock %}
