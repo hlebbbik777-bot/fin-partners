@@ -53,12 +53,8 @@
 <script>
   function copyFlow(id, btn){
     const input = document.getElementById(id);
-    input.select();
-    input.setSelectionRange(0, 99999);
     navigator.clipboard.writeText(input.value);
-    const old = btn.textContent;
-    btn.textContent = "Скопировано";
-    setTimeout(() => btn.textContent = old, 1200);
+    showToast("Ссылка скопирована");
   }
 </script>
 
