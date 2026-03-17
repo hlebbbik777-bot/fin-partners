@@ -3,59 +3,120 @@
 {% block content %}
 
 <div class="glass rounded-[32px] p-8 mb-6">
+
   <div class="flex flex-col xl:flex-row xl:items-center xl:justify-between gap-6">
+
     <div>
-      <div class="text-sm uppercase tracking-[0.25em] txt-muted mb-3">dashboard</div>
-      <h1 class="text-4xl md:text-5xl font-extrabold tracking-tight txt-main">Партнёрская статистика</h1>
+      <div class="text-sm uppercase tracking-[0.25em] txt-muted mb-3">
+        dashboard
+      </div>
+
+      <h1 class="text-4xl md:text-5xl font-extrabold tracking-tight txt-main">
+        Партнёрская статистика
+      </h1>
+
       <p class="mt-4 txt-muted max-w-2xl leading-7">
-        Следи за кликами, лидами и доходом в одном окне. Это центр управления трафиком и банковскими офферами.
+        Следи за кликами, лидами и доходом в одном окне.
       </p>
     </div>
 
-    <div class="w-full max-w-md glass-soft rounded-[28px] p-4">
+    <div class="w-full max-w-md flex items-center justify-center">
+
       <img
-        src="https://images.unsplash.com/photo-1556740749-887f6717d7e4?auto=format&fit=crop&w=900&q=80"
-        alt="dashboard"
-        class="h-64 w-full object-cover rounded-[24px]"
+      src="/static/images/monkey.jpg"
+      class="rounded-3xl shadow-2xl max-h-[420px]"
       >
+
     </div>
+
   </div>
+
 </div>
+
+
 
 <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-5 mb-6">
-  <div class="glass rounded-[28px] p-6">
-    <div class="text-xs uppercase tracking-[0.25em] txt-muted">Clicks</div>
-    <div class="mt-4 text-5xl font-extrabold stat-num txt-main">{{ clicks or 0 }}</div>
-    <div class="mt-3 txt-muted">все переходы по офферам</div>
-  </div>
 
   <div class="glass rounded-[28px] p-6">
-    <div class="text-xs uppercase tracking-[0.25em] txt-muted">Leads</div>
-    <div class="mt-4 text-5xl font-extrabold stat-num txt-main">{{ leads or 0 }}</div>
-    <div class="mt-3 txt-muted">подтверждённые и входящие конверсии</div>
+    <div class="text-xs uppercase tracking-[0.25em] txt-muted">
+      Clicks
+    </div>
+
+    <div class="mt-4 text-5xl font-extrabold stat-num txt-main">
+      {{ clicks or 0 }}
+    </div>
+
+    <div class="mt-3 txt-muted">
+      переходы по офферам
+    </div>
   </div>
 
-  <div class="glass rounded-[28px] p-6">
-    <div class="text-xs uppercase tracking-[0.25em] txt-muted">Revenue</div>
-    <div class="mt-4 text-5xl font-extrabold stat-num txt-main">{{ money or 0 }} ₽</div>
-    <div class="mt-3 txt-muted">доход по лидам</div>
-  </div>
 
   <div class="glass rounded-[28px] p-6">
-    <div class="text-xs uppercase tracking-[0.25em] txt-muted">Status</div>
-    <div class="mt-4 text-3xl font-extrabold txt-main">ACTIVE</div>
-    <div class="mt-3 txt-muted">аккаунт подключён к системе</div>
+    <div class="text-xs uppercase tracking-[0.25em] txt-muted">
+      Leads
+    </div>
+
+    <div class="mt-4 text-5xl font-extrabold stat-num txt-main">
+      {{ leads or 0 }}
+    </div>
+
+    <div class="mt-3 txt-muted">
+      полученные заявки
+    </div>
   </div>
+
+
+  <div class="glass rounded-[28px] p-6">
+    <div class="text-xs uppercase tracking-[0.25em] txt-muted">
+      Revenue
+    </div>
+
+    <div class="mt-4 text-5xl font-extrabold stat-num txt-main">
+      {{ money or 0 }} ₽
+    </div>
+
+    <div class="mt-3 txt-muted">
+      доход партнёра
+    </div>
+  </div>
+
+
+  <div class="glass rounded-[28px] p-6">
+    <div class="text-xs uppercase tracking-[0.25em] txt-muted">
+      Status
+    </div>
+
+    <div class="mt-4 text-3xl font-extrabold txt-main">
+      ACTIVE
+    </div>
+
+    <div class="mt-3 txt-muted">
+      аккаунт активен
+    </div>
+  </div>
+
 </div>
 
+
+
 <div class="glass rounded-[32px] p-8">
+
   <div class="mb-6">
-    <h2 class="text-2xl font-bold txt-main">Последние лиды</h2>
-    <p class="mt-2 txt-muted">Минимальная таблица последних конверсий</p>
+    <h2 class="text-2xl font-bold txt-main">
+      Последние лиды
+    </h2>
+
+    <p class="mt-2 txt-muted">
+      Последние конверсии по аккаунту
+    </p>
   </div>
 
+
   <div class="table-shell">
+
     <table>
+
       <thead>
         <tr>
           <th>ID</th>
@@ -65,9 +126,14 @@
           <th>Date</th>
         </tr>
       </thead>
+
+
       <tbody>
+
         {% if leads_table %}
+
           {% for lead in leads_table %}
+
           <tr>
             <td>{{ lead.id }}</td>
             <td>{{ lead.name }}</td>
@@ -75,15 +141,25 @@
             <td>{{ lead.payout }} ₽</td>
             <td>{{ lead.created_at }}</td>
           </tr>
+
           {% endfor %}
+
         {% else %}
-          <tr>
-            <td colspan="5" class="text-center txt-muted">Пока лидов нет</td>
-          </tr>
+
+        <tr>
+          <td colspan="5" class="text-center txt-muted">
+            Пока лидов нет
+          </td>
+        </tr>
+
         {% endif %}
+
       </tbody>
+
     </table>
+
   </div>
+
 </div>
 
 {% endblock %}
