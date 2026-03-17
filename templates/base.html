@@ -33,6 +33,14 @@
       --shadow:0 20px 40px rgba(15,23,42,0.08);
     }
 
+    *{
+      box-sizing:border-box;
+    }
+
+    html{
+      scroll-behavior:smooth;
+    }
+
     body{
       background:
         radial-gradient(circle at 10% 10%, rgba(56,189,248,0.18), transparent 22%),
@@ -40,6 +48,7 @@
         radial-gradient(circle at 50% 100%, rgba(59,130,246,0.12), transparent 30%),
         linear-gradient(180deg, var(--bg) 0%, var(--bg2) 100%);
       color:var(--text);
+      overflow-x:hidden;
     }
 
     .glass{
@@ -47,12 +56,57 @@
       border:1px solid var(--line);
       box-shadow:var(--shadow);
       backdrop-filter:blur(20px);
+      position:relative;
+      overflow:hidden;
+      transition:
+        transform .28s ease,
+        box-shadow .28s ease,
+        border-color .28s ease,
+        background .28s ease;
+    }
+
+    .glass::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:linear-gradient(
+        120deg,
+        transparent 0%,
+        rgba(255,255,255,0.08) 18%,
+        transparent 36%
+      );
+      transform:translateX(-140%);
+      transition:transform .9s ease;
+      pointer-events:none;
+    }
+
+    .glass:hover::before{
+      transform:translateX(140%);
+    }
+
+    .glass:hover{
+      transform:translateY(-3px);
+      box-shadow:0 28px 80px rgba(0,0,0,0.42);
+      border-color:rgba(255,255,255,0.16);
+    }
+
+    html[data-theme="light"] .glass:hover{
+      box-shadow:0 28px 55px rgba(15,23,42,0.12);
     }
 
     .glass-soft{
       background:var(--panel2);
       border:1px solid var(--line);
       backdrop-filter:blur(18px);
+      transition:
+        transform .24s ease,
+        background .24s ease,
+        border-color .24s ease;
+    }
+
+    .glass-soft:hover{
+      transform:translateY(-2px);
+      border-color:rgba(255,255,255,0.16);
     }
 
     .txt-main{ color:var(--text); }
@@ -66,23 +120,52 @@
       border-radius:18px;
       padding:14px 16px;
       outline:none;
+      transition:
+        border-color .2s ease,
+        transform .2s ease,
+        box-shadow .2s ease;
+    }
+
+    .field:focus{
+      border-color:rgba(24,183,255,0.8);
+      box-shadow:0 0 0 4px rgba(24,183,255,0.12);
+      transform:translateY(-1px);
     }
 
     .btn-main{
       background:linear-gradient(135deg,var(--accent),var(--accent2));
       color:white;
-      transition:.2s ease;
+      transition:
+        transform .2s ease,
+        filter .2s ease,
+        box-shadow .2s ease;
+      box-shadow:0 10px 24px rgba(24,183,255,0.18);
     }
 
     .btn-main:hover{
-      transform:translateY(-1px);
+      transform:translateY(-2px) scale(1.01);
       filter:brightness(1.05);
+      box-shadow:0 16px 30px rgba(24,183,255,0.26);
+    }
+
+    .btn-main:active{
+      transform:translateY(0) scale(.99);
     }
 
     .btn-ghost{
       background:var(--panel2);
       border:1px solid var(--line);
       color:var(--text);
+      transition:
+        transform .18s ease,
+        background .18s ease,
+        border-color .18s ease;
+    }
+
+    .btn-ghost:hover{
+      transform:translateY(-1px);
+      border-color:rgba(255,255,255,0.16);
+      background:rgba(255,255,255,0.07);
     }
 
     .table-shell{
@@ -111,24 +194,94 @@
       padding:16px 18px;
       border-top:1px solid var(--line);
       color:var(--text);
+      transition:background .18s ease;
+    }
+
+    .table-shell tbody tr:hover td{
+      background:rgba(255,255,255,0.025);
     }
 
     .fade-up{
-      animation:fadeUp .55s ease;
+      animation:fadeUp .65s cubic-bezier(.2,.8,.2,1) both;
+    }
+
+    .fade-up-delay-1{
+      animation:fadeUp .7s cubic-bezier(.2,.8,.2,1) .08s both;
+    }
+
+    .fade-up-delay-2{
+      animation:fadeUp .75s cubic-bezier(.2,.8,.2,1) .16s both;
+    }
+
+    .fade-up-delay-3{
+      animation:fadeUp .8s cubic-bezier(.2,.8,.2,1) .24s both;
     }
 
     @keyframes fadeUp{
-      from{ opacity:0; transform:translateY(14px); }
-      to{ opacity:1; transform:translateY(0); }
+      from{
+        opacity:0;
+        transform:translateY(18px) scale(.985);
+      }
+      to{
+        opacity:1;
+        transform:translateY(0) scale(1);
+      }
+    }
+
+    .pulse-dot{
+      width:10px;
+      height:10px;
+      border-radius:999px;
+      background:#22c55e;
+      box-shadow:0 0 0 rgba(34,197,94,.6);
+      animation:pulseDot 1.8s infinite;
+    }
+
+    @keyframes pulseDot{
+      0%{ box-shadow:0 0 0 0 rgba(34,197,94,.65); }
+      70%{ box-shadow:0 0 0 12px rgba(34,197,94,0); }
+      100%{ box-shadow:0 0 0 0 rgba(34,197,94,0); }
+    }
+
+    .float-slow{
+      animation:floatSlow 5.5s ease-in-out infinite;
+    }
+
+    @keyframes floatSlow{
+      0%,100%{ transform:translateY(0); }
+      50%{ transform:translateY(-6px); }
     }
 
     .mobile-drawer{
       transform:translateX(-100%);
-      transition:transform .25s ease;
+      transition:transform .28s ease;
     }
 
     .mobile-drawer.open{
       transform:translateX(0);
+    }
+
+    .mobile-overlay{
+      opacity:0;
+      pointer-events:none;
+      transition:opacity .25s ease;
+    }
+
+    .mobile-overlay.open{
+      opacity:1;
+      pointer-events:auto;
+    }
+
+    .toast{
+      opacity:0;
+      transform:translateY(14px) scale(.98);
+      pointer-events:none;
+      transition:all .28s ease;
+    }
+
+    .toast.show{
+      opacity:1;
+      transform:translateY(0) scale(1);
     }
   </style>
 </head>
@@ -138,7 +291,7 @@
     <aside class="hidden md:flex w-72 flex-col glass border-r fade-up">
       <div class="px-6 py-6 border-b" style="border-color:var(--line)">
         <div class="flex items-center gap-4">
-          <div class="h-14 w-14 rounded-2xl btn-main flex items-center justify-center shadow-lg">
+          <div class="h-14 w-14 rounded-2xl btn-main flex items-center justify-center shadow-lg float-slow">
             <span class="text-white font-black text-2xl">F</span>
           </div>
           <div>
@@ -158,6 +311,8 @@
         <a href="/logout" class="block rounded-2xl px-4 py-3 text-rose-300 hover:bg-rose-500/10 transition">Logout</a>
       </nav>
     </aside>
+
+    <div id="mobileOverlay" class="mobile-overlay md:hidden fixed inset-0 z-40 bg-black/40"></div>
 
     <div id="mobileDrawer" class="mobile-drawer md:hidden fixed inset-y-0 left-0 z-50 w-72 glass p-5">
       <div class="flex items-center justify-between mb-6">
@@ -187,15 +342,26 @@
             </div>
           </div>
 
-          <button id="themeToggle" class="btn-ghost rounded-2xl px-4 py-3 font-semibold flex items-center gap-3" type="button">
-            <span id="themeIcon">🌙</span>
-            <span id="themeLabel">Dark</span>
-          </button>
+          <div class="flex items-center gap-3">
+            <div class="hidden sm:flex items-center gap-2 glass-soft rounded-2xl px-4 py-3">
+              <div class="pulse-dot"></div>
+              <span class="text-sm font-semibold txt-main">Live</span>
+            </div>
+
+            <button id="themeToggle" class="btn-ghost rounded-2xl px-4 py-3 font-semibold flex items-center gap-3" type="button">
+              <span id="themeIcon">🌙</span>
+              <span id="themeLabel">Dark</span>
+            </button>
+          </div>
         </div>
 
         {% block content %}{% endblock %}
       </div>
     </main>
+  </div>
+
+  <div id="toast" class="toast fixed bottom-6 right-6 glass rounded-2xl px-5 py-4 text-sm font-semibold txt-main z-[80]">
+    Ссылка скопирована
   </div>
 
   <script>
@@ -227,34 +393,34 @@
     });
 
     const drawer = document.getElementById("mobileDrawer");
+    const overlay = document.getElementById("mobileOverlay");
     const openDrawer = document.getElementById("openDrawer");
     const closeDrawer = document.getElementById("closeDrawer");
 
-    if (openDrawer) {
-      openDrawer.addEventListener("click", () => drawer.classList.add("open"));
+    function closeMenu(){
+      if(drawer) drawer.classList.remove("open");
+      if(overlay) overlay.classList.remove("open");
     }
 
-    if (closeDrawer) {
-      closeDrawer.addEventListener("click", () => drawer.classList.remove("open"));
+    function openMenu(){
+      if(drawer) drawer.classList.add("open");
+      if(overlay) overlay.classList.add("open");
     }
+
+    if (openDrawer) openDrawer.addEventListener("click", openMenu);
+    if (closeDrawer) closeDrawer.addEventListener("click", closeMenu);
+    if (overlay) overlay.addEventListener("click", closeMenu);
+
+    window.showToast = function(message = "Ссылка скопирована"){
+      const toast = document.getElementById("toast");
+      if (!toast) return;
+      toast.textContent = message;
+      toast.classList.add("show");
+      clearTimeout(window.__toastTimer);
+      window.__toastTimer = setTimeout(() => {
+        toast.classList.remove("show");
+      }, 1400);
+    };
   </script>
-<div id="toast" class="fixed bottom-6 right-6 opacity-0 pointer-events-none transition-all duration-300 translate-y-4 glass rounded-2xl px-5 py-4 text-sm font-semibold 
-txt-main">
-  Ссылка скопирована
-</div>
-
-<script>
-  window.showToast = function(message = "Ссылка скопирована"){
-    const toast = document.getElementById("toast");
-    if (!toast) return;
-    toast.textContent = message;
-    toast.classList.remove("opacity-0","pointer-events-none","translate-y-4");
-    toast.classList.add("opacity-100","translate-y-0");
-    setTimeout(() => {
-      toast.classList.add("opacity-0","pointer-events-none","translate-y-4");
-      toast.classList.remove("opacity-100","translate-y-0");
-    }, 1400);
-  }
-</script>
 </body>
 </html>
