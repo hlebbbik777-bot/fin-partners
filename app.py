@@ -327,3 +327,16 @@ def payouts():
 
     return render_template("payouts.html",user=user)
 
+@app.route("/profile")
+def profile():
+    if "user_id" not in session:
+        return redirect("/login")
+
+    conn = db()
+    user = conn.execute(
+        "SELECT * FROM users WHERE id=?",
+        (session["user_id"],)
+    ).fetchone()
+    conn.close()
+
+    return render_template("profile.html", user=user)
