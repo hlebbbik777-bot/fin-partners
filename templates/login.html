@@ -1,29 +1,70 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Вход</title>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>FIN Partners</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
+
 </head>
-<body>
-  <h1>Вход</h1>
 
-  <form action="/login" method="POST">
-    <div>
-      <label>Email</label><br>
-      <input type="email" name="email" required>
-    </div>
 
-    <br>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
 
-    <div>
-      <label>Пароль</label><br>
-      <input type="password" name="password" required>
-    </div>
+<div class="bg-white shadow-2xl rounded-2xl p-10 w-full max-w-md">
 
-    <br>
+<h1 class="text-3xl font-bold text-center mb-6">
+FIN Partners
+</h1>
 
-    <button type="submit">Войти</button>
-  </form>
+<p class="text-center text-gray-500 mb-8">
+Affiliate Network Dashboard
+</p>
+
+<form method="POST">
+
+<input
+type="email"
+name="email"
+placeholder="Email"
+required
+class="w-full border border-gray-300 rounded-lg p-3 mb-4 focus:outline-none focus:ring-2 focus:ring-blue-500"
+/>
+
+
+<input
+type="password"
+name="password"
+placeholder="Password"
+required
+class="w-full border border-gray-300 rounded-lg p-3 mb-6 focus:outline-none focus:ring-2 focus:ring-blue-500"
+/>
+
+
+<button
+class="w-full bg-blue-600 hover:bg-blue-700 text-white p-3 rounded-lg font-semibold transition">
+
+Login
+
+</button>
+
+</form>
+
+
+<div class="text-center mt-6">
+
+<a href="/register" class="text-blue-600 hover:underline">
+Create account
+</a>
+
+</div>
+
+</div>
+
 </body>
+
 </html>
