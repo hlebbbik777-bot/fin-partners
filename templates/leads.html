@@ -2,14 +2,14 @@
 
 {% block content %}
 
-<div class="glass rounded-[32px] p-8 mb-6">
+<div class="glass rounded-[32px] p-8 mb-6 fade-up">
   <h1 class="text-4xl font-extrabold tracking-tight txt-main">Лиды</h1>
   <p class="mt-3 txt-muted max-w-2xl leading-7">
-    История конверсий по аккаунту: статус, выплата и дата создания.
+    Вся история конверсий по аккаунту: оффер, статус, выплата и дата создания.
   </p>
 </div>
 
-<div class="glass rounded-[32px] p-8">
+<div class="glass rounded-[32px] p-8 fade-up">
   <div class="table-shell">
     <table>
       <thead>
@@ -27,7 +27,11 @@
           <tr>
             <td>{{ lead.id }}</td>
             <td>{{ lead.name }}</td>
-            <td>{{ lead.status }}</td>
+            <td>
+              <span class="inline-flex rounded-full px-3 py-1 text-xs font-bold tracking-[0.15em] uppercase bg-emerald-500/15 text-emerald-300 border border-emerald-400/20">
+                {{ lead.status }}
+              </span>
+            </td>
             <td>{{ lead.payout }} ₽</td>
             <td>{{ lead.created_at }}</td>
           </tr>
